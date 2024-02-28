@@ -18,6 +18,8 @@ def main():
     # Register the shutdown handler for SIGINT (Ctrl+C)
     signal.signal(signal.SIGINT, shutdownHandler)
     
+    print("Starting...")
+    print("Press Ctrl+C to quit...")
     
     teamNumbers = LinkGetter.getNBATeams("https://www.nba.com/teams")
     print(teamNumbers)
@@ -29,6 +31,10 @@ def main():
         teamURL = "https://www.nba.com/stats/team/" + teamNumber
         
         playerStats = Cleaner.cleanNBATeamStats(teamURL)
+        
+        # TODO: add function to Cleaner.py for cleaning string into dictionary for uploading to DB
+        
+        # TODO: add function to Load.py for loading player stats to DB
 
         
         

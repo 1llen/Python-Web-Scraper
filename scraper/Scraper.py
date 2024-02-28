@@ -23,6 +23,19 @@ def scrapePage(url):
     return htmlDecoded
 
 def scrapeDynamicPage(url, waitTag):
+    """scrapeDynamicPage
+    returns html of page at url after waiting for "waitTag" to load. Used for pages with client side javascript. Uses selenium webdriver to emulate browser.
+
+    Args:
+        url (str): The url of the page to scrape
+        waitTag (str): The html tag to wait for to load before scraping
+
+    Returns:
+        str: The html of the page
+    """
+    
+    # TODO: "quietly" open the browser
+    
     driver = webdriver.Chrome()
     driver.get(url)
     
