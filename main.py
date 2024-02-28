@@ -33,6 +33,8 @@ def main():
         
         playerStats = Scraper.extractNBATeamStats(teamURL)
         
+        teamName = Scraper.extractNBATeamName(teamURL)
+        
         playersLoaded = 0
         staffLoaded = 0
         
@@ -46,11 +48,10 @@ def main():
             if (not Cleaner.isCoach(rawStat)):
                 # TODO: load player stats to DB
                 playersLoaded += 1
-                
-        print("Loaded " + str(playersLoaded) + " players and " + str(staffLoaded) + " staff")
-
-
-    
+             
+        print("From " + str(teamName) + ": Loaded " + str(playersLoaded) + " players and " + str(staffLoaded) + " staff")   
+        
+            
     try: 
         while True:
             print("Running...")

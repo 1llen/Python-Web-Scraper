@@ -46,10 +46,7 @@ def scrapeDynamicPage(url, waitTag):
         tr_element = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, tag))
         )
-        
-        # DEBUG
-        print(tr_element.text)
-        
+
         return driver.page_source
         
     except Exception as e:
@@ -57,6 +54,20 @@ def scrapeDynamicPage(url, waitTag):
         
     finally:
         driver.quit()
+        
+def extractNBATeamName(teamURL):
+    page = scrapePage(teamURL)
+    
+    pattern = r'<title>(.*?)Team Info and News | NBA.com</title>'
+    
+    teamName = re.search(pattern, page)
+    
+    if teamName:
+        print("Success: " + str(teamName.group(1)))
+        return teamName.group(1)
+    else:
+        print("No team name found")
+        return None
         
 def extractNBATeamStats(teamURL):
     """extractNBATeamStats
