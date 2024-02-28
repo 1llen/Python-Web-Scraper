@@ -7,6 +7,7 @@ import time
 from scraper import Cleaner
 from scraper import Scraper
 from linkGetter import LinkGetter
+from loadToDB import Load
 
 def shutdownHandler(signum, frame):
     print("Shutting down...")
@@ -28,20 +29,25 @@ def main():
     for teamNumber in teamNumbers:
         
         # append team number to url
-        teamURL = "https://www.nba.com/stats/team/" + teamNumber
+        teamURL = "https://www.nba.com/stats/team/" + teamNumber + "?Season=2022-23"
         
         playerStats = Scraper.extractNBATeamStats(teamURL)
+        
+        playersLoaded = 0
+        staffLoaded = 0
         
         for rawStat in playerStats:
             cleaned = Cleaner.cleanNBAStat(rawStat)
             
             if (Cleaner.isCoach(rawStat)):
                 # TODO: load coach stats to DB
-                pass
+                staffLoaded += 1
             
             if (not Cleaner.isCoach(rawStat)):
                 # TODO: load player stats to DB
-                pass
+                playersLoaded += 1
+                
+        print("Loaded " + str(playersLoaded) + " players and " + str(staffLoaded) + " staff")
 
 
     
