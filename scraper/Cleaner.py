@@ -1,5 +1,4 @@
 import re
-# from bs4 import BeautifulSoup
 import sys
 
 sys.path.append("..")
@@ -19,11 +18,7 @@ def cleanNBATeamStats(teamURL):
     
     # scrape each <tr> to </tr> tag using regex
     pattern = r'<tr>(.*?)</tr>'
-    teamStats = re.findall(pattern, teamHTML, re.DOTALL)
-    
-    # soup = BeautifulSoup(teamHTML, 'html.parser')
-    # teamStats = soup.find_all('tr')
-    
+    teamStats = re.findall(pattern, teamHTML, re.DOTALL)    
     
     print(teamStats)
     
