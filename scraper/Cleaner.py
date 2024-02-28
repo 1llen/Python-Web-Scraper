@@ -26,26 +26,27 @@ def cleanNBAPlayerStat(playerStatRaw):
     Returns:
         formatted_record (dict): A dictionary of cleaned player stats
     """
-    cleaned = re.sub(r'<[^>]+>', '', playerStatRaw) # remove html tags and classes
+    cleaned = re.sub(r'<[^>]+>', ' ', playerStatRaw) # remove html tags and classes
     
-    components = cleaned.split()
+    components = cleaned.split() # split by spaces
     
-    if len(components) >= 10:
-        formatted_record = {
+    if len(components) >= 10: # if there are 10 or more components
+        # Create dictionary based on components in list
+        formattedRecord = {
         "First Name": components[0],
         "Last Name": components[1],
         "Number": components[2],
         "Position": components[3],
         "Height": components[4],
         "Weight": components[5],
-        "Date of Birth": components[7:9],
+        "Date of Birth": components[7:10],
         "Age": components[10],
         "Experience": components[11],        
         }
-        print("Success: " + formatted_record)
-        return formatted_record      
+        print("Success: " + str(formattedRecord))
+        return formattedRecord      
     
-    print("Error: " + playerStatRaw)
+    print("Error: " + playerStatRaw) # if there are less than 10 components
     return None  
     
 def cleanNBACoachStat(coachStatRaw):
@@ -58,6 +59,40 @@ def cleanNBACoachStat(coachStatRaw):
     Returns:
         formatted_record (dict): A dictionary of cleaned coach stats
     """
+    
+    cleaned = re.sub(r'<[^>]+>', ' ', coachStatRaw) # remove html tags and classes
+    
+    components = cleaned.split() # split into list by spaces
+    
+    if len(components) >= 2: # if there are 2 or more components
+        formattedRecord = {
+            "First Name": components[-2],
+            "Last Name": components[-1],
+            "Role": " ".join(components[:-2]),
+        }
+        print("Success: " + str(formattedRecord))
+        return formattedRecord
+    
+    print("Error: " + coachStatRaw) # if there are less than 2 components
+    return None
+    
+def cleanNBAStat(playerOrCoachStatRaw):
+    """cleanNBAStat
+    Returns a dictionary of cleaned player or coach stats from an entry in the list returned from extractNBATeamStats()
+
+    Args:
+        playerOrCoachStatRaw (str): The unformatted player or coach stat
+
+    Returns:
+        formatted_record (dict): A dictionary of cleaned player or coach stats
+    """
+    
+    if isCoach(playerOrCoachStatRaw): # if the record is a coach
+        return cleanNBACoachStat(playerOrCoachStatRaw)
+    else: # if the record is a player
+        return cleanNBAPlayerStat(playerOrCoachStatRaw)
+    
+    
     
     
     

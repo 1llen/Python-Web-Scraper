@@ -33,22 +33,17 @@ def main():
         playerStats = Scraper.extractNBATeamStats(teamURL)
         
         for rawStat in playerStats:
-            # DEBUG: print rawStat
-            print(rawStat)
+            cleaned = Cleaner.cleanNBAStat(rawStat)
             
-            # Check if record is header, coach, or player
+            if (Cleaner.isCoach(rawStat)):
+                # TODO: load coach stats to DB
+                pass
             
-            # cleanedStat = Cleaner.cleanNBAPlayerStat(rawStat)
-            
-            # DEBUG: print cleanedStat
-            # print(cleanedStat)
-        
-        # TODO: add function to Load.py for loading player stats to DB
+            if (not Cleaner.isCoach(rawStat)):
+                # TODO: load player stats to DB
+                pass
 
-        
-        
-    
-    
+
     
     try: 
         while True:
