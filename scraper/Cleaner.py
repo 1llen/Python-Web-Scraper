@@ -8,12 +8,12 @@ from scraper import Scraper
 def cleanNBATeamStats(teamURL):
     
     print(teamURL)
-    teamHTML = Scraper.scrapePage(teamURL) # return html of team stats
+    teamHTML = Scraper.scrapeDynamicPage(teamURL, 'table') # return html of team stats
     
     # write html to txt file
-    with open('teamHTML.txt', 'w') as f:
-        f.write(teamHTML)
-        f.close()
+    # with open('teamHTML.txt', 'w') as f:
+    #     f.write(teamHTML)
+    #     f.close()
     
     print(teamHTML)
     

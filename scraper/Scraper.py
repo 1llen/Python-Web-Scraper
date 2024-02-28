@@ -1,4 +1,9 @@
-from urllib.request import urlopen
+from urllib.request import urlopen # for static web scraping
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 def scrapePage(url):
     """scrapePage
@@ -16,4 +21,28 @@ def scrapePage(url):
     htmlDecoded = htmlPage.decode("utf-8")
     
     return htmlDecoded
+
+def scrapeDynamicPage(url, waitTag):
+    driver = webdriver.Chrome()
+    driver.get(url)
+    
+    tag = "//" + waitTag
+    
+    try: 
+        # wait for </table> tag to load
+        tr_element = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, tag))
+        )
+        
+        # DEBUG
+        print(tr_element.text)
+        
+        return driver.page_source
+        
+    except Exception as e:
+        print("Error: " + str(e))
+        
+    finally:
+        driver.quit()
+        
 
