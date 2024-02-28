@@ -1,9 +1,6 @@
 import re
 import sys
 
-sys.path.append("..")
-from scraper import Scraper
-
 def isCoach(rawStat):
     """isCoach
     Checks if the record is a coach
@@ -31,6 +28,9 @@ def cleanNBAPlayerStat(playerStatRaw):
     components = cleaned.split() # split by spaces
     
     if len(components) >= 10: # if there are 10 or more components
+        # Create date for postgres date format
+        dateOfBirth = components[8] + " " + components[7] + " " + components[9]
+        
         # Create dictionary based on components in list
         formattedRecord = {
         "First Name": components[0],
@@ -39,7 +39,7 @@ def cleanNBAPlayerStat(playerStatRaw):
         "Position": components[3],
         "Height": components[4],
         "Weight": components[5],
-        "Date of Birth": components[7:10],
+        "Date of Birth": dateOfBirth,
         "Age": components[10],
         "Experience": components[11],        
         }
