@@ -22,8 +22,7 @@ def main():
     print("Press Ctrl+C to quit...")
     
     teamNumbers = LinkGetter.getNBATeams("https://www.nba.com/teams")
-    print(teamNumbers)
-    
+        
     # iterate through team numbers and scrape team stat pages
     for teamNumber in teamNumbers:
         
