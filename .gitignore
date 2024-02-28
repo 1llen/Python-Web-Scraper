@@ -1,6 +1,10 @@
+# Standard files for python projects
 *.log
 *.pot
 *.pyc
 */*/*/__pycache__/
 */*/__pycache__/
 */__pycache__/
+
+# Specific files for data holding
+teamHTML.txt

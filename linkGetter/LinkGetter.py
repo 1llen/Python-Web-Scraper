@@ -6,12 +6,19 @@ from scraper import Scraper
 url = "https://www.nba.com/teams"
 
 def getNBATeams(url): 
-    page = Scraper.scrapePage(url)
+    """getNBATeams
+    Returns a list of links to team stat pages
+
+    Args:
+        url (str): The url of the page to scrape
+
+    Returns:
+        list: A list of links to team stat pages
+    """
+    page = Scraper.scrapePage(url) # returns entire html of page at url as a string
     
-    pattern = r'href="/stats/team/(\d+)"'
+    pattern = r'href="/stats/team/(\d+)"' # regex pattern
         
-    teams = re.findall(pattern, page)    
+    teams = re.findall(pattern, page) # find all matches
     
     return teams
-
-getNBATeams(url)

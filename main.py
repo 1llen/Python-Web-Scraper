@@ -4,7 +4,7 @@ import signal
 import sys
 import time
 
-from scraper import Scraper
+from scraper import Cleaner
 from linkGetter import LinkGetter
 
 def shutdownHandler(signum, frame):
@@ -18,11 +18,22 @@ def main():
     # Register the shutdown handler for SIGINT (Ctrl+C)
     signal.signal(signal.SIGINT, shutdownHandler)
     
-    # pageHtml = Scraper.scrapePage("https://www.nba.com/stats/history")
     
     teamNumbers = LinkGetter.getNBATeams("https://www.nba.com/teams")
-    
     print(teamNumbers)
+    
+    # iterate through team numbers and scrape team stat pages
+    for teamNumber in teamNumbers:
+        
+        # append team number to url
+        teamURL = "https://www.nba.com/stats/team/" + teamNumber
+        
+        playerStats = Cleaner.cleanNBATeamStats(teamURL)
+
+        
+        
+    
+    
     
     try: 
         while True:
