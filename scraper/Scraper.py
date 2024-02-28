@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+import re
 
 def scrapePage(url):
     """scrapePage
@@ -57,5 +57,25 @@ def scrapeDynamicPage(url, waitTag):
         
     finally:
         driver.quit()
+        
+def extractNBATeamStats(teamURL):
+    """extractNBATeamStats
+    Returns a list of cleaned team stats from the NBA team stats page
+
+    Args:
+        teamURL (str): The url of the NBA team stats page
+
+    Returns:
+        list: A list of cleaned team stats. Formatted as `<First Name> <Last Name> "#"<Number>, <Position>, <Height> <Weight in lbs> "lbs" <Date of birth as 'MMM DD, YYYY'> <Age> <Experience> <School> <How Aquired>`
+    """
+    
+    print(teamURL)
+    teamHTML = scrapeDynamicPage(teamURL, 'table') # return html of team stats
+    
+    # scrape each <tr> to </tr> tag using regex
+    pattern = r'<tr>(.*?)</tr>'
+    teamStats = re.findall(pattern, teamHTML, re.DOTALL) # find all matches and store in list
+    
+    return teamStats
         
 

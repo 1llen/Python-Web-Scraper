@@ -4,40 +4,62 @@ import sys
 sys.path.append("..")
 from scraper import Scraper
 
-def cleanNBATeamStats(teamURL):
-    """cleanNBATeamStats
-    Returns a list of cleaned team stats from the NBA team stats page
+def isCoach(rawStat):
+    """isCoach
+    Checks if the record is a coach
 
     Args:
-        teamURL (str): The url of the NBA team stats page
+        rawStat (str): The unformatted player stat
 
     Returns:
-        list: A list of cleaned team stats. Formatted as `<First Name> <Last Name> "#"<Number>, <Position>, <Height> <Weight in lbs> "lbs" <Date of birth as 'MMM DD, YYYY'> <Age> <Experience> <School> <How Aquired>`
+        bool: True if the record is a coach, False otherwise
     """
-    
-    print(teamURL)
-    teamHTML = Scraper.scrapeDynamicPage(teamURL, 'table') # return html of team stats
-    
-    # scrape each <tr> to </tr> tag using regex
-    pattern = r'<tr>(.*?)</tr>'
-    teamStats = re.findall(pattern, teamHTML, re.DOTALL) # find all matches and store in list
-    
-    # DEBUG: write to file
-    with open("teamStats.txt", "w") as file:
-        file.write(str(teamStats))
-    
-    return teamStats
+    return "Head Coach" in rawStat or "Assistant Coach" in rawStat or "Trainer" in rawStat
 
-def cleanNBAPlayerStats(playerStatList):
+def cleanNBAPlayerStat(playerStatRaw):
     """cleanNBAPlayerStats
-    Cleans a list of player stats from cleanNBATeamStats(). 
+    Cleans a dictionary of a players stats from an entry in the list returned from extractNBATeamStats(). 
 
     Args:
-        playerStatList (list): The list of player stats to clean
+        playerStatRaw (str): The unformatted player stat
 
     Returns:
-        list: A list of dictionaries of cleaned player stats 
+        formatted_record (dict): A dictionary of cleaned player stats
     """
+    cleaned = re.sub(r'<[^>]+>', '', playerStatRaw) # remove html tags and classes
+    
+    components = cleaned.split()
+    
+    if len(components) >= 10:
+        formatted_record = {
+        "First Name": components[0],
+        "Last Name": components[1],
+        "Number": components[2],
+        "Position": components[3],
+        "Height": components[4],
+        "Weight": components[5],
+        "Date of Birth": components[7:9],
+        "Age": components[10],
+        "Experience": components[11],        
+        }
+        print("Success: " + formatted_record)
+        return formatted_record      
+    
+    print("Error: " + playerStatRaw)
+    return None  
+    
+def cleanNBACoachStat(coachStatRaw):
+    """cleanNBACoachStat
+    Returns a dictionary of cleaned coach stats from an entry in the list returned from extractNBATeamStats() that is confirmed to be a coach
+
+    Args:
+        coachStatRaw (str): The unformatted coach stat
+
+    Returns:
+        formatted_record (dict): A dictionary of cleaned coach stats
+    """
+    
+    
     
     
     

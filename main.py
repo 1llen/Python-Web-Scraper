@@ -5,6 +5,7 @@ import sys
 import time
 
 from scraper import Cleaner
+from scraper import Scraper
 from linkGetter import LinkGetter
 
 def shutdownHandler(signum, frame):
@@ -29,9 +30,18 @@ def main():
         # append team number to url
         teamURL = "https://www.nba.com/stats/team/" + teamNumber
         
-        playerStats = Cleaner.cleanNBATeamStats(teamURL)
+        playerStats = Scraper.extractNBATeamStats(teamURL)
         
-        # TODO: add function to Cleaner.py for cleaning string into dictionary for uploading to DB
+        for rawStat in playerStats:
+            # DEBUG: print rawStat
+            print(rawStat)
+            
+            # Check if record is header, coach, or player
+            
+            # cleanedStat = Cleaner.cleanNBAPlayerStat(rawStat)
+            
+            # DEBUG: print cleanedStat
+            # print(cleanedStat)
         
         # TODO: add function to Load.py for loading player stats to DB
 
