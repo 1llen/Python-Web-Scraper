@@ -3,8 +3,6 @@ import sys
 sys.path.append("..")
 from scraper import Scraper
 
-url = "https://www.nba.com/teams"
-
 def getNBATeams(url): 
     """getNBATeams
     Returns a list of links to team stat pages
