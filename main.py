@@ -7,7 +7,8 @@ import time
 from scraper import Cleaner
 from scraper import Scraper
 from linkGetter import LinkGetter
-from loadToDB import Load
+from loadToDB.Load import load_player_to_db, load_coach_to_db
+#from Load import load_player_to_db, load_coach_to_db
 
 def shutdownHandler(signum, frame):
     print("Shutting down...")
@@ -41,15 +42,24 @@ def main():
         for rawStat in playerStats:
             cleaned = Cleaner.cleanNBAStat(rawStat)
             
-            if (Cleaner.isCoach(rawStat)):
-                # TODO: load coach stats to DB
-                staffLoaded += 1
+            # if (Cleaner.isCoach(rawStat)):
+            #     # TODO: load coach stats to DB
+            #     staffLoaded += 1
             
-            if (not Cleaner.isCoach(rawStat)):
-                # TODO: load player stats to DB
-                playersLoaded += 1
-             
-        print("From " + str(teamName) + ": Loaded " + str(playersLoaded) + " players and " + str(staffLoaded) + " staff")   
+            # if (not Cleaner.isCoach(rawStat)):
+            #     # TODO: load player stats to DB
+            #     playersLoaded += 1
+            if Cleaner.isCoach(rawStat):
+                coach_data = cleaned
+                load_coach_to_db(coach_data, teamName)
+
+            if not Cleaner.isCoach(rawStat):
+                player_data = cleaned
+                load_player_to_db(player_data, teamName)
+            
+        print(f"From {teamName}: Loaded {playersLoaded} players and {staffLoaded} staff")
+
+        # print("From " + str(teamName) + ": Loaded " + str(playersLoaded) + " players and " + str(staffLoaded) + " staff")   
         
             
     try: 
