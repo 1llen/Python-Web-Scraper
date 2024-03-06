@@ -42,24 +42,19 @@ def main():
         for rawStat in playerStats:
             cleaned = Cleaner.cleanNBAStat(rawStat)
             
-            # if (Cleaner.isCoach(rawStat)):
-            #     # TODO: load coach stats to DB
-            #     staffLoaded += 1
-            
-            # if (not Cleaner.isCoach(rawStat)):
-            #     # TODO: load player stats to DB
-            #     playersLoaded += 1
             if Cleaner.isCoach(rawStat):
                 coach_data = cleaned
                 load_coach_to_db(coach_data, teamName)
+                staffLoaded += 1
 
             if not Cleaner.isCoach(rawStat):
                 player_data = cleaned
                 load_player_to_db(player_data, teamName)
+                playersLoaded += 1
             
-        print(f"From {teamName}: Loaded {playersLoaded} players and {staffLoaded} staff")
+        # print(f"From {teamName}: Loaded {playersLoaded} players and {staffLoaded} staff")
 
-        # print("From " + str(teamName) + ": Loaded " + str(playersLoaded) + " players and " + str(staffLoaded) + " staff")   
+        print("From " + str(teamName) + ": Loaded " + str(playersLoaded) + " players and " + str(staffLoaded) + " staff")   
         
             
     try: 

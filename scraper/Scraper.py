@@ -56,6 +56,15 @@ def scrapeDynamicPage(url, waitTag):
         driver.quit()
         
 def extractNBATeamName(teamURL):
+    """extractNBATeamName
+    Extracts the NBA team name from the team URL
+
+    Args:
+        teamURL (str): The url of the NBA team
+
+    Returns:
+        str: The name of the NBA team
+    """
     page = scrapePage(teamURL)
     
     pattern = r'<title>(.*?)Team Info and News | NBA.com</title>'
