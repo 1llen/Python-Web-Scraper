@@ -6,6 +6,8 @@ There are plenty of sources of data online, but despite the data being readily a
 
 Our goal is to create a specialized web scraper for extracting and analyzing data from popular sources.
 
+From [NBA.com](https://www.nba.com/), we can view player and team data year by year, but have no way to compare or analyze the data. A buzzword in basketball is "impact": the amount of impact a player has on the outcome of a game or season. Currently, there is no way to compare or analyze impact on their site. We aim to create a web scraper that allows us to extract and analyze the data, giving us a way to track the performance and "impact" a player has on a team, particularly after transferring.
+
 ## Table of Contents
 
 - [Python Web Scraper](#python-web-scraper)
