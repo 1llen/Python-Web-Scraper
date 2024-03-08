@@ -42,8 +42,8 @@ def scrapeDynamicPage(url, waitTag):
     tag = "//" + waitTag
     
     try: 
-        # wait for </table> tag to load
-        tr_element = WebDriverWait(driver, 10).until(
+        # wait for tag to load
+        element = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, tag))
         )
 
@@ -91,7 +91,8 @@ def extractNBATeamStats(teamURL):
         list: A list of cleaned team stats. Formatted as `<First Name> <Last Name> "#"<Number>, <Position>, <Height> <Weight in lbs> "lbs" <Date of birth as 'MMM DD, YYYY'> <Age> <Experience> <School> <How Aquired>`
     """
     
-    print(teamURL)
+    # Console logging
+    # print(teamURL)
     teamHTML = scrapeDynamicPage(teamURL, 'table') # return html of team stats
     
     # scrape each <tr> to </tr> tag using regex
