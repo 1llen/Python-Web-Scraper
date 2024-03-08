@@ -82,6 +82,7 @@ The loading is done through a module called `Load`, which uses the `pymongo` mod
 
 ## Roadmap
 
+- Re-organize file structure; each folder is a feature
 - Implement viewer for DB
 - Implement LinkedIn scraper
 - Modify scraper to use memoization (stored on DB)
