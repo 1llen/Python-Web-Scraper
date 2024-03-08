@@ -23,32 +23,26 @@ def cleanNBAPlayerStat(playerStatRaw):
     Returns:
         formatted_record (dict): A dictionary of cleaned player stats
     """
-    cleaned = re.sub(r'<[^>]+>', ' ', playerStatRaw) # remove html tags and classes
+    # Parse HTML with BeautifulSoup
+    soup = BeautifulSoup(playerStatRaw, 'html.parser')
     
-    components = cleaned.split() # split by spaces
+    # Extract text content from all non-tag elements into list
+    text_content = list(soup.stripped_strings)
     
-    if len(components) >= 10: # if there are 10 or more components
-        # Create date for postgres date format
-        dateOfBirth = components[8] + " " + components[7] + " " + components[9]
-        
-        # Create dictionary based on components in list
-        formattedRecord = {
-        "First Name": components[0],
-        "Last Name": components[1],
-        "Number": components[2],
-        "Position": components[3],
-        "Height": components[4],
-        "Weight": components[5],
-        "Date of Birth": dateOfBirth,
-        "Age": components[10],
-        "Experience": components[11],        
-        }
-        # Console logging
-        # print("Success: " + str(formattedRecord))
-        return formattedRecord      
+    # Convert to dictionary
+    formatted_record = {}
     
-    print("Error: " + playerStatRaw) # if there are less than 10 components
-    return None  
+    formatted_record["Name"] = text_content[0]
+    formatted_record["Number"] = text_content[1]
+    formatted_record["Position"] = text_content[2]
+    formatted_record["Height"] = text_content[3]
+    formatted_record["Weight"] = text_content[4]
+    formatted_record["Date of Birth"] = text_content[5]
+    formatted_record["Age"] = text_content[6]
+    formatted_record["Experience"] = text_content[7]
+    formatted_record["School"] = text_content[8]
+      
+    return formatted_record
     
 def cleanNBAPlayerAverageStats(playerStatsRaw):
     # Parse HTML with BeautifulSoup

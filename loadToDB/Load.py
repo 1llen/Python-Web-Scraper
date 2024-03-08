@@ -22,11 +22,12 @@ def load_player_to_db(player_data, team_name):
     Returns:
         None
     """
+    # TODO: Move to hosted DB
     db = connect_to_db()
 
     try:
         # filters through first_name and last_name to avoid duplicates
-        filter_query = {"first_name": player_data["First Name"], "last_name": player_data["Last Name"]}
+        filter_query = {"Name": player_data["Name"]}
         update_query = {
             "$set": {
                 "number": player_data["Number"],
