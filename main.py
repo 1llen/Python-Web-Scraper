@@ -35,7 +35,7 @@ def main():
                 if typeOption == "1":
                     NBAScraper()
                 elif typeOption == "2":
-                    print("TODO: Player Stats")
+                    NBAPlayerStats()
             elif scraperOption == "2":
                 print("TODO: LinkedIn Scraper")
                 pass
@@ -96,8 +96,37 @@ def NBAScraper(year="2023"):
         # Console logging
         print("From " + str(teamName) + ": Loaded " + str(playersLoaded) + " players and " + str(staffLoaded) + " staff")   
         
-def NBAPlayerStats():
-    pass
+def NBAPlayerStats(year="2023", seasonType = "Regular+Season", seasonSegment = "All"):
+    teamNumbers = LinkGetter.getNBATeams("https://www.nba.com/teams")
+        
+    # Modify year 
+    startYear = str(int(year) - 1)
+    endYear = year[-2:]
+    
+    # Modify season segment
+    if seasonSegment == "All":
+        seasonSegment = ""
+    # TODO: Implement other season segments and types
+    
+    for teamNumber in teamNumbers:
+        teamURL = "https://www.nba.com/stats/team/" + teamNumber + "/players-traditional?Season=" + startYear + "-" + endYear + "&SeasonType=" + seasonType
+        
+        if seasonSegment != "":
+            teamURL = teamURL + "&SeasonSegment=" + seasonSegment
+
+        # Console logging
+        print(teamURL)
+
+        # Extract team stat pages
+        playerStats = Scraper.extractNBAPlayerStats(teamURL)
+        
+        for rawStat in playerStats:
+            cleaned = Cleaner.cleanNBAPlayerAverageStats(rawStat)
+            
+            # TODO: Insert into MongoDB (WITH YEAR)
+            
+            
+    
     
         
 def NBAViewer():

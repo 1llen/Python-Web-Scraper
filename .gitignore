@@ -9,3 +9,5 @@
 # Specific files for data holding
 teamHTML.txt
 teamStats.txt
+raw_player_stats.txt
+cleaned_player_stats.txt

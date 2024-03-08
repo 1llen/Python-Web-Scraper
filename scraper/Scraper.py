@@ -100,5 +100,54 @@ def extractNBATeamStats(teamURL):
     teamStats = re.findall(pattern, teamHTML, re.DOTALL) # find all matches and store in list
     
     return teamStats
+
+def scrapePage(url):
+    """scrapePage
+    returns entire html of page at url
+
+    Args:
+        url (str): The url of the page to scrape
+
+    Returns:
+        str: The html of the page
+    """
+    page = urlopen(url)
+    
+    htmlPage = page.read()
+    htmlDecoded = htmlPage.decode("utf-8")
+    
+    return htmlDecoded
+
+def scrapeDynamicPageByClassName(url, className):
+    
+    # TODO: "quietly" open the browser
+    
+    driver = webdriver.Chrome()
+    driver.get(url)
+    
+    try: 
+        # wait for tag to load
+        element = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, className))
+        )
+
+        return driver.page_source
+        
+    except Exception as e:
+        print("Error: " + str(e))
+        
+    finally:
+        driver.quit()
+
+def extractNBAPlayerStats(teamURL):
+    
+    # Wait for Crom_body__UYOcU to load
+    teamHTML = scrapeDynamicPageByClassName(teamURL, 'Crom_body__UYOcU') 
+    
+    # scrape each <tr> to </tr> tag using regex
+    pattern = r'<tr>(.*?)</tr>'
+    teamStats = re.findall(pattern, teamHTML, re.DOTALL) # find all matches and store in list
+    
+    return teamStats
         
 

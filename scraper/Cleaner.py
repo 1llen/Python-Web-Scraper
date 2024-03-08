@@ -1,4 +1,5 @@
 import re
+from bs4 import BeautifulSoup
 
 def isCoach(rawStat):
     """isCoach
@@ -49,6 +50,19 @@ def cleanNBAPlayerStat(playerStatRaw):
     print("Error: " + playerStatRaw) # if there are less than 10 components
     return None  
     
+def cleanNBAPlayerAverageStats(playerStatsRaw):
+    # Parse HTML with BeautifulSoup
+    soup = BeautifulSoup(playerStatsRaw, 'html.parser')
+
+    # Extract text content from all non-tag elements into list
+    text_content = list(soup.stripped_strings)
+    
+    print("Name: " + text_content[0])
+    print("Contents: " + str(text_content))
+    
+    return text_content
+    
+
 def cleanNBACoachStat(coachStatRaw):
     """cleanNBACoachStat
     Returns a dictionary of cleaned coach stats from an entry in the list returned from extractNBATeamStats() that is confirmed to be a coach
