@@ -31,7 +31,11 @@ def main():
         if option == "1":
             scraperOption = input("Select a scraper: \n1. NBA \n2. LinkedIn [TO DO]\n3. Back to main menu\n")
             if scraperOption == "1":
-                NBAScraper()
+                typeOption = input("Select a type: \n1. Player data \n2. Player Stats \n3. Back to main menu\n")
+                if typeOption == "1":
+                    NBAScraper()
+                elif typeOption == "2":
+                    print("TODO: Player Stats")
             elif scraperOption == "2":
                 print("TODO: LinkedIn Scraper")
                 pass
@@ -91,6 +95,19 @@ def NBAScraper(year="2023"):
 
         # Console logging
         print("From " + str(teamName) + ": Loaded " + str(playersLoaded) + " players and " + str(staffLoaded) + " staff")   
+        
+    
+        
+    def NBAViewer():
+        # TODO:
+        # Call DB function for selecting teams
+        # Client should be able to select a team
+        # Call DB function for selecting players for that team
+        
+        # Impact:
+        # Team stats before and after a player has been traded to/from
+        
+        pass
 
 if __name__ == "__main__":
     main()

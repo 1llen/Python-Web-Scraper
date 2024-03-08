@@ -86,6 +86,8 @@ The loading is done through a module called `Load`, which uses the `pymongo` mod
 
 - Re-organize file structure; each folder is a feature
 
+  -
+
   ```
   Python-Web-Scraper
   |- NBA
@@ -107,6 +109,20 @@ The loading is done through a module called `Load`, which uses the `pymongo` mod
   |- README.md
   ```
 
-- Implement viewer for DB
-- Implement LinkedIn scraper
-- Modify scraper to use memoization (stored on DB)
+- ## Implement viewer for DB
+  - Select and display data from DB
+- ## Implement LinkedIn scraper
+- ## Modify scraper to use memoization (stored on DB)
+  - To avoid scraping pages already scraped
+- ## Scrape individual player stats
+  - e.g. [https://www.nba.com/stats/team/1610612755/players-traditional?Season=2022-23&SeasonType=Regular+Season&SeasonSegment=Post+All-Star](https://www.nba.com/stats/team/1610612755/players-traditional?Season=2022-23&SeasonType=Regular+Season&SeasonSegment=Post+All-Star)
+  - `players-traditional` is the type of data we want to scrape
+  - `Season=2022-23` is the year we want to scrape data from; can be any year
+  - `SeasonType=Regular Season` is the type of season we want to scrape data from; can be one of the following:
+    - `Pre+Season`
+    - `Regular+Season`
+    - `Playoffs`
+  - `SeasonSegment=Post+All-Star` is the segment of the season we want to scrape data from; can be one of the following:
+    - `SeasonSegment=Pre+All-Star`
+    - `SeasonSegment=Post+All-Star`
+    - `Month=1` is the month we want to scrape data from; 1 = October, 7 = April
