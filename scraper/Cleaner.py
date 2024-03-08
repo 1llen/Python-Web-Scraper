@@ -42,7 +42,8 @@ def cleanNBAPlayerStat(playerStatRaw):
         "Age": components[10],
         "Experience": components[11],        
         }
-        print("Success: " + str(formattedRecord))
+        # Console logging
+        # print("Success: " + str(formattedRecord))
         return formattedRecord      
     
     print("Error: " + playerStatRaw) # if there are less than 10 components
@@ -69,7 +70,8 @@ def cleanNBACoachStat(coachStatRaw):
             "Last Name": components[-1],
             "Role": " ".join(components[:-2]),
         }
-        print("Success: " + str(formattedRecord))
+        # Console logging
+        # print("Success: " + str(formattedRecord))
         return formattedRecord
     
     print("Error: " + coachStatRaw) # if there are less than 2 components

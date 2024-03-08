@@ -41,7 +41,8 @@ def load_player_to_db(player_data, team_name):
         }
 
         db.players.update_one(filter_query, update_query, upsert=True)
-        print("Player data loaded to MongoDB successfully")
+        # Console logging
+        # print("Player data loaded to MongoDB successfully")
         
     except Exception as e:
         print(f"Error loading player data to MongoDB: {e}")
@@ -70,7 +71,9 @@ def load_coach_to_db(coach_data, team_name):
         }
 
         db.coaches.update_one(filter_query, update_query, upsert=True)
-        print("Coach data loaded to MongoDB successfully")
+        
+        # Console logging
+        # print("Coach data loaded to MongoDB successfully")
 
     except Exception as e:
         print(f"Error loading coach data to MongoDB: {e}")

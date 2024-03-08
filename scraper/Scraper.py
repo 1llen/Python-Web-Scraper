@@ -72,10 +72,12 @@ def extractNBATeamName(teamURL):
     teamName = re.search(pattern, page)
     
     if teamName:
-        print("Success: " + str(teamName.group(1)))
+        # Console logging
+        # print("Success: " + str(teamName.group(1)))
         return teamName.group(1)
     else:
-        print("No team name found")
+        # Console logging
+        # print("No team name found")
         return None
         
 def extractNBATeamStats(teamURL):

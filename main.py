@@ -22,15 +22,52 @@ def main():
     signal.signal(signal.SIGINT, shutdownHandler)
     
     print("Starting...")
-    print("Press Ctrl+C to quit...")
+    print("Press Ctrl+C to quit...")        
+            
+    # Main Menu
+    while True:
+        print("Temporary CLI Main Menu:")
+        option = input("Select an option: \n1. Scraper \n2. Viewer [TODO]\n3. Exit\n")
+        if option == "1":
+            scraperOption = input("Select a scraper: \n1. NBA \n2. LinkedIn [TO DO]\n3. Back to main menu\n")
+            if scraperOption == "1":
+                NBAScraper()
+            elif scraperOption == "2":
+                print("TODO: LinkedIn Scraper")
+                pass
+            elif scraperOption == "3":
+                pass
+            else:
+                print("Invalid option. Please try again.") 
+            
+        elif option == "2":
+            print("TODO: Viewer")
+            pass
+        elif option == "3":
+            print("Exiting...")
+            sys.exit(0)
+        else:
+            print("Invalid option. Please try again.") 
     
+    try: 
+        while True:
+            print("Running...")
+            time.sleep(5)
+    except KeyboardInterrupt:
+        pass # Ctrl+C pressed
+    
+def NBAScraper(year="2023"):
     teamNumbers = LinkGetter.getNBATeams("https://www.nba.com/teams")
         
+    # Modify year 
+    startYear = str(int(year) - 1)
+    endYear = year[-2:]
+    
     # iterate through team numbers and scrape team stat pages
     for teamNumber in teamNumbers:
         
-        # append team number to url
-        teamURL = "https://www.nba.com/stats/team/" + teamNumber + "?Season=2022-23"
+        # append team number and year to url
+        teamURL = "https://www.nba.com/stats/team/" + teamNumber + "?Season=" + startYear + "-" + endYear
         
         playerStats = Scraper.extractNBATeamStats(teamURL)
         
@@ -51,18 +88,9 @@ def main():
                 player_data = cleaned
                 load_player_to_db(player_data, teamName)
                 playersLoaded += 1
-            
-        # print(f"From {teamName}: Loaded {playersLoaded} players and {staffLoaded} staff")
 
+        # Console logging
         print("From " + str(teamName) + ": Loaded " + str(playersLoaded) + " players and " + str(staffLoaded) + " staff")   
-        
-            
-    try: 
-        while True:
-            print("Running...")
-            time.sleep(5)
-    except KeyboardInterrupt:
-        pass # Ctrl+C pressed
 
 if __name__ == "__main__":
     main()
