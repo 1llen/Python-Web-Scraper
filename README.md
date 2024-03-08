@@ -95,12 +95,16 @@ The loading is done through a module called `Load`, which uses the `pymongo` mod
   |||- LinkGetter.py
   ||- Load
   |||- Load.py
+  |
   |- LinkedIn
+  ||- Cleaner
+  |||- Cleaner.py
+  |
   |- Scraper
   ||- Scraper.py
+  |
   |- main.py
   |- README.md
-
   ```
 
 - Implement viewer for DB
