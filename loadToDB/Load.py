@@ -27,7 +27,7 @@ def load_player_to_db(player_data, team_name):
 
     try:
         # filters through first_name and last_name to avoid duplicates
-        filter_query = {"Name": player_data["Name"]}
+        filter_query = {"name": player_data["Name"]}
         update_query = {
             "$set": {
                 "number": player_data["Number"],
@@ -35,7 +35,7 @@ def load_player_to_db(player_data, team_name):
                 "height": player_data["Height"],
                 "weight": player_data["Weight"],
                 "date_of_birth": player_data["Date of Birth"],
-                "age": player_data["Age"],
+                "age": int(player_data["Age"]),
                 "experience": player_data["Experience"],
                 "team": team_name
             }

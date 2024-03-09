@@ -76,7 +76,11 @@ The loading is done through a module called `Load`, which uses the `pymongo` mod
 
 ## Team
 
-[TO DO]
+Allen Clark - 124888223
+
+Danny Do -
+
+Daniel Fu -
 
 ## Testing
 
