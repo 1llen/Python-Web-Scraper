@@ -8,6 +8,8 @@ from scraper import Cleaner
 from scraper import Scraper
 from linkGetter import LinkGetter
 from loadToDB.Load import load_player_to_db, load_coach_to_db
+from display import AgeStats
+from display import HeightStats
 #from Load import load_player_to_db, load_coach_to_db
 
 def shutdownHandler(signum, frame):
@@ -27,7 +29,7 @@ def main():
     # Main Menu
     while True:
         print("Temporary CLI Main Menu:")
-        option = input("Select an option: \n1. Scraper \n2. Viewer [TODO]\n3. Exit\n")
+        option = input("Select an option: \n1. Scraper \n2. Viewer \n3. Exit\n")
         if option == "1":
             scraperOption = input("Select a scraper: \n1. NBA \n2. LinkedIn [TO DO]\n3. Back to main menu\n")
             if scraperOption == "1":
@@ -45,8 +47,15 @@ def main():
                 print("Invalid option. Please try again.") 
             
         elif option == "2":
-            print("TODO: Viewer")
-            pass
+            viewOption = input("Select a analysis: \n1. Player age \n2. Player height (TODO) \n3. Back to main menu\n")
+            if viewOption == "1":
+                AgeStats.ageStatistics()
+            elif viewOption == "2":
+                HeightStats.heightStatistics()
+            elif viewOption == "3":
+                pass
+            else:
+                print("Invalid")
         elif option == "3":
             print("Exiting...")
             sys.exit(0)
