@@ -133,8 +133,6 @@ def NBAPlayerStats(year="2023", seasonType = "Regular+Season", seasonSegment = "
             cleaned = Cleaner.cleanNBAPlayerAverageStats(rawStat)
             
             # TODO: Insert into MongoDB (WITH YEAR)
-            
-            
     
     
         

@@ -1,5 +1,6 @@
 import pymongo
 
+
 def ageStatistics():
     client = pymongo.MongoClient("mongodb://localhost:27017/")
     db = client["NBAstats"]
@@ -25,18 +26,35 @@ def ageStatistics():
     oldest_players = list(collection.find({"age": str(oldest_age)}))
 
     # Calculate and print average age
-    total_age = sum([int(player.get('age', '0')) for player in collection.find()])
+    total_age = sum([int(player.get('age', '0'))
+                    for player in collection.find()])
     num_of_players = collection.count_documents({})
     avg_age = round(total_age / num_of_players, 2)
 
-    print("\nThe average age out of {} players in the NBA is {}.\n".format(num_of_players, avg_age))
+    print("\nThe average age out of {} players in the NBA is {}.\n".format(
+        num_of_players, avg_age))
 
     # Print youngest player(s)
     print("The youngest player(s) in the NBA at the age of {}:".format(youngest_age))
     for player in youngest_players:
-        print("- {}".format(player.get('Name', '')))
+        print("- {}".format(player.get('name', '')))
 
     # Print oldest player(s)
     print("\nThe oldest player(s) in the NBA at the age of {}:".format(oldest_age))
     for player in oldest_players:
-        print("- {}".format(player.get('Name', '')))
+        print("- {}".format(player.get('name', '')))
+
+
+    # Calculate average age for each team
+    average_age_by_team = collection.aggregate([
+        {"$group": {"_id": "$team", "avgAge": {"$avg": {"$toInt": "$age"}}}}
+    ])
+    # Convert CommandCursor to list and sort
+    average_age_by_team = list(average_age_by_team)
+    oldest_team = max(average_age_by_team, key=lambda x: x["avgAge"])
+    youngest_team = min(average_age_by_team, key=lambda x: x["avgAge"])
+
+    print("\nThe team with the oldest average players is {} with an average age of {:.2f}.\n".format(
+        oldest_team["_id"], oldest_team["avgAge"]))
+    print("The team with the youngest average players is {} with an average age of {:.2f}.\n".format(
+        youngest_team["_id"], youngest_team["avgAge"]))
