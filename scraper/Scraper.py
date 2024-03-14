@@ -101,24 +101,17 @@ def extractNBATeamStats(teamURL):
     
     return teamStats
 
-def scrapePage(url):
-    """scrapePage
-    returns entire html of page at url
+def scrapeDynamicPageByClassName(url, className):
+    """scrapeDynamicPage
+    returns html of page at url after waiting for "className" to load. Used for pages with client side javascript. Uses selenium webdriver to emulate browser. 
 
     Args:
-        url (str): The url of the page to scrape
+        url (str): _description_
+        className (str): _description_
 
     Returns:
         str: The html of the page
     """
-    page = urlopen(url)
-    
-    htmlPage = page.read()
-    htmlDecoded = htmlPage.decode("utf-8")
-    
-    return htmlDecoded
-
-def scrapeDynamicPageByClassName(url, className):
     
     # TODO: "quietly" open the browser
     
@@ -140,6 +133,15 @@ def scrapeDynamicPageByClassName(url, className):
         driver.quit()
 
 def extractNBAPlayerStats(teamURL):
+    """extractNBAPlayerStats
+    Returns a list of cleaned player stats from the NBA player stats page. Calls scrapeDynamicPageByClassName() to get the html of the page.
+
+    Args:
+        teamURL (str): The url of the NBA player stats page
+
+    Returns:
+        list: Players and their associated stats. Formatted as `<First Name> <Last Name> "#"<Number>, <Position>, <Height> <Weight in lbs> "lbs" <Date of birth as 'MMM DD, YYYY'> <Age> <Experience> <School> <How Aquired>`
+    """
     
     # Wait for Crom_body__UYOcU to load
     teamHTML = scrapeDynamicPageByClassName(teamURL, 'Crom_body__UYOcU') 
