@@ -142,9 +142,6 @@ def NBAViewer():
     # Client should be able to select a team
     # Call DB function for selecting players for that team
     
-    # Impact:
-    # Team stats before and after a player has been traded to/from
-    
     pass
 
 if __name__ == "__main__":
