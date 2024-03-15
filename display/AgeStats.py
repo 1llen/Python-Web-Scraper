@@ -37,12 +37,12 @@ def ageStatistics():
     # Print youngest player(s)
     print("The youngest player(s) in the NBA at the age of {}:".format(youngest_age))
     for player in youngest_players:
-        print("- {}".format(player.get('name', '')))
+        print("- {}".format(player.get('Name', '')))
 
     # Print oldest player(s)
     print("\nThe oldest player(s) in the NBA at the age of {}:".format(oldest_age))
     for player in oldest_players:
-        print("- {}".format(player.get('name', '')))
+        print("- {}".format(player.get('Name', '')))
 
 
     # Calculate average age for each team

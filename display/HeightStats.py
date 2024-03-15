@@ -28,7 +28,7 @@ def heightStatistics():
             if (feet_str.isnumeric() and inch_str.isnumeric()):
                 height_inches = int(height_str_split[0]) * 12 + int(height_str_split[1])
                 
-                player_name = f"{document.get('first_name')} {document.get('last_name')}"
+                player_name = f"{document.get('Name')}"
                 player_data[player_name] = height_inches
 
     # Find the tallest players

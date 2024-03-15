@@ -40,9 +40,9 @@ def loginLinkedIn():
             soup = BeautifulSoup(response.content, 'html.parser')
             job_listings = soup.find_all('div', class_='base-card relative w-full hover:no-underline focus:no-underline base-card--link base-search-card base-search-card--link job-search-card')
 
-            # with open('job_listings.txt', 'w', encoding='utf-8') as file:
-            #     for job in job_listings:
-            #         file.write(str(job) + '\n\n')
+            with open('job_listings.txt', 'w', encoding='utf-8') as file:
+                for job in job_listings:
+                    file.write(str(job) + '\n\n')
                     
             for job in job_listings:
                 title_elem = job.find('h3', class_="base-search-card__title")
