@@ -66,7 +66,7 @@ The data that is scraped contains the entire webpage, which then needs to be san
 
 ### Load data into database
 
-Currently, we are using [MongoDB](https://www.mongodb.com/) as our database. This is because we wanted to take advantage of a NoSQL database, which helps mitigate the strict nature of relational databases. While this makes data loading simpler, it is also not as robust as relational databases. We viewed this as a compromise; we prioritized our development time over reliability. In the future, data may be moved from a NoSQL database to a relational database.
+Currently, we are using [MongoDB](https://www.mongodb.com/) as our database. This is because we wanted to take advantage of a NoSQL database, which helps mitigate the strict nature of relational databases. While this makes data loading simpler, it is also not as robust as relational databases. We viewed this as a compromise; we prioritized our development time over reliability. In the future, data may be moved from a NoSQL database to a relational database for production, and rely on the MongoDB database purely for loading between development and production.
 
 The loading is done through a module called `Load`, which uses the `pymongo` module to connect to the database. Specialized functions are then used for loading data from each source, such as `load_player_to_db` and `load_coach_to_db`.
 
