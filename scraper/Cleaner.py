@@ -51,8 +51,9 @@ def cleanNBAPlayerAverageStats(playerStatsRaw):
     # Extract text content from all non-tag elements into list
     text_content = list(soup.stripped_strings)
     
-    print("Name: " + text_content[0])
-    print("Contents: " + str(text_content))
+    # DEBUG: Console logging
+    # print("Name: " + text_content[0])
+    # print("Contents: " + str(text_content))
     
     return text_content
     

@@ -34,7 +34,7 @@ def scrapeDynamicPage(url, waitTag):
         str: The html of the page
     """
     
-    # TODO: "quietly" open the browser
+    # TODO: "quietly" open the browser (headless)
     
     driver = webdriver.Chrome()
     driver.get(url)
