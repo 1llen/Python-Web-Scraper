@@ -70,6 +70,13 @@ def main():
         pass # Ctrl+C pressed
     
 def NBAScraper(year="2023"):
+    """
+    Scrape NBA player and coach data for the specified year.
+    TODO: Move to seperate file
+
+    Args:
+        year (str, optional): _description_. Defaults to "2023".
+    """
     teamNumbers = LinkGetter.getNBATeams("https://www.nba.com/teams")
         
     # Modify year 
@@ -114,6 +121,15 @@ def NBAScraper(year="2023"):
         print("From " + str(teamName) + ": Loaded " + str(playersLoaded) + " players and " + str(staffLoaded) + " staff \n")   
         
 def NBAPlayerStats(year="2023", seasonType = "Regular+Season", seasonSegment = "All"):
+    """
+    Scrape NBA player and coach data for the specified year.
+    TODO: Move to seperate file
+
+    Args:
+        year (str, optional): _description_. Defaults to "2023".
+        seasonType (str, optional): _description_. Defaults to "Regular+Season".
+        seasonSegment (str, optional): _description_. Defaults to "All".
+    """
     teamNumbers = LinkGetter.getNBATeams("https://www.nba.com/teams")
         
     # Modify year 

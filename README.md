@@ -1,6 +1,6 @@
 # Python Web Scraper
 
-### A webscraper for scraping specialized data
+## A webscraper for scraping specialized data
 
 There are plenty of sources of data online, but despite the data being readily available, many of the sites don't provide any way of comparing and analyzing the data.
 
@@ -82,7 +82,7 @@ Danny Do - 115996225
 
 ## Testing
 
-[TO DO]
+Approximately 50% code coverage
 
 ## Roadmap
 
@@ -112,11 +112,17 @@ Danny Do - 115996225
   ```
 
 - ## Implement viewer for DB
+
   - Select and display data from DB
+
 - ## Implement LinkedIn scraper
+
 - ## Modify scraper to use memoization (stored on DB)
+
   - To avoid scraping pages already scraped
+
 - ## Scrape individual player stats
+
   - e.g. [https://www.nba.com/stats/team/1610612755/players-traditional?Season=2022-23&SeasonType=Regular+Season&SeasonSegment=Post+All-Star](https://www.nba.com/stats/team/1610612755/players-traditional?Season=2022-23&SeasonType=Regular+Season&SeasonSegment=Post+All-Star)
   - `players-traditional` is the type of data we want to scrape
   - `Season=2022-23` is the year we want to scrape data from; can be any year
