@@ -2,8 +2,14 @@ import pymongo
 
 
 def ageStatistics():
-    client = pymongo.MongoClient("mongodb://localhost:27017/")
-    db = client["NBAstats"]
+    """
+    Displays the youngest and oldest players in the collection.
+    """
+    connection_string = "mongodb+srv://allen:thisisthedumbpassword@mongonba.cnucra6.mongodb.net/?retryWrites=true&w=majority&appName=mongoNBA"
+    database_name = "NBA"
+    
+    client = pymongo.MongoClient(connection_string)
+    db = client[database_name]
     collection = db["players"]
 
     # Filter out players with unrealistic ages (over 100)

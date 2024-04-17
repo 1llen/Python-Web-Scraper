@@ -80,8 +80,6 @@ Allen Clark - 124888223
 
 Danny Do - 115996225
 
-Daniel Fu -
-
 ## Testing
 
 [TO DO]
@@ -92,7 +90,7 @@ Daniel Fu -
 
   -
 
-  ```
+  ```bash
   Python-Web-Scraper
   |- NBA
   ||- Cleaner

@@ -3,10 +3,16 @@ import matplotlib.pyplot as plt
 import heapq
 
 def heightStatistics():
+    """
+    Displays the top 20 tallest players in the NBA.
+    """
 
     # Connect to MongoDB
-    client = pymongo.MongoClient("mongodb://localhost:27017/")
-    db = client["NBAstats"]
+    connection_string = "mongodb+srv://allen:thisisthedumbpassword@mongonba.cnucra6.mongodb.net/?retryWrites=true&w=majority&appName=mongoNBA"
+    database_name = "NBA"
+    
+    client = pymongo.MongoClient(connection_string)
+    db = client[database_name]
     collection = db["players"]
 
     # Retrieve data

@@ -7,7 +7,7 @@ import time
 from scraper import Cleaner
 from scraper import Scraper
 from linkGetter import LinkGetter
-from loadToDB.Load import load_player_to_db, load_coach_to_db
+from loadToDB.Load import load_player_to_db, load_coach_to_db, load_URL_to_db, check_URL_in_db
 from display import AgeStats
 from display import HeightStats
 #from Load import load_player_to_db, load_coach_to_db
@@ -82,6 +82,11 @@ def NBAScraper(year="2023"):
         # append team number and year to url
         teamURL = "https://www.nba.com/stats/team/" + teamNumber + "?Season=" + startYear + "-" + endYear
         
+        # Check if URL has already been loaded for memoization; returns true if it exists in DB already
+        if (check_URL_in_db(teamURL)):
+            # go to next team
+            continue
+        
         playerStats = Scraper.extractNBATeamStats(teamURL)
         
         teamName = Scraper.extractNBATeamName(teamURL)
@@ -93,7 +98,7 @@ def NBAScraper(year="2023"):
             cleaned = Cleaner.cleanNBAStat(rawStat)
             
             if Cleaner.isCoach(rawStat):
-                coach_data = cleaned
+                coach_data = cleaned                
                 load_coach_to_db(coach_data, teamName)
                 staffLoaded += 1
 
@@ -102,8 +107,11 @@ def NBAScraper(year="2023"):
                 load_player_to_db(player_data, teamName)
                 playersLoaded += 1
 
+        # load url to db
+        load_URL_to_db(teamURL)
+
         # Console logging
-        print("From " + str(teamName) + ": Loaded " + str(playersLoaded) + " players and " + str(staffLoaded) + " staff")   
+        print("From " + str(teamName) + ": Loaded " + str(playersLoaded) + " players and " + str(staffLoaded) + " staff \n")   
         
 def NBAPlayerStats(year="2023", seasonType = "Regular+Season", seasonSegment = "All"):
     teamNumbers = LinkGetter.getNBATeams("https://www.nba.com/teams")
@@ -126,6 +134,11 @@ def NBAPlayerStats(year="2023", seasonType = "Regular+Season", seasonSegment = "
         # Console logging
         print(teamURL)
 
+        # Check if URL has already been loaded for memoization; returns true if it exists in DB already
+        if (check_URL_in_db(teamURL)):
+            # go to next team in for loop
+            continue
+
         # Extract team stat pages
         playerStats = Scraper.extractNBAPlayerStats(teamURL)
         
@@ -133,6 +146,13 @@ def NBAPlayerStats(year="2023", seasonType = "Regular+Season", seasonSegment = "
             cleaned = Cleaner.cleanNBAPlayerAverageStats(rawStat)
             
             # TODO: Insert into MongoDB (WITH YEAR)
+            
+            # Console logging
+            print("Loaded player: " + str(cleaned["player"]) + " with " + str(cleaned["gp"]) + " games played and " + str(cleaned["pts"]) + " points")
+            
+        
+            
+        
     
     
         
