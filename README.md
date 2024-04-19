@@ -82,7 +82,7 @@ Danny Do - 115996225
 
 ## Testing
 
-Approximately 50% code coverage
+Approximately 70% code coverage; Integration testing required for main.py
 
 ## Roadmap
 
