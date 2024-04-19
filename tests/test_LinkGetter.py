@@ -18,8 +18,11 @@ class TestGetNBATeams(unittest.TestCase):
         Args:
             mock_scrapePage (MagicMock): Mock function for the scrapePage method of the Scraper class.
         """
+        # Mock the return value of the scrapePage method
         mock_scrapePage.return_value = '<a href="/stats/team/1">Team 1</a><a href="/stats/team/2">Team 2</a>'
+        # Call the getNBATeams function
         result = getNBATeams("https://example.com")
+        # Assert that the returned list of team IDs matches the expected list
         self.assertEqual(result, ['1', '2'],
                          "The list of team IDs should match the IDs in the links on the page.")
 
