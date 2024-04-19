@@ -40,11 +40,11 @@ To use this library, you will need to install the following libraries:
 - `matplotlib`
 - `pymongo`
 
-Or alternatively, you can run "setup.py" to install the libraries. [TO DO]
+Or alternatively, you can install from requirements.txt by running `pip install -r requirements.txt`.
 
 ### Basic usage
 
-[TO DO: Implement year selector for team stats so that the user can choose a year to extract data from.]
+By running the `run_script.sh` script, you can run the Python script, along with installing the dependencies. The script will then run the `main.py` script which will being a CLI prompting the user for input.
 
 ## Sources of data
 
